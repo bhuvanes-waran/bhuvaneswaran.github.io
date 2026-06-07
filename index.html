@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bhuvaneswaran R — Team Lead & .NET Full-Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0a0a0f;
+    --bg-card: #111118;
+    --bg-card2: #16161f;
+    --accent: #6c63ff;
+    --accent2: #00d4aa;
+    --accent3: #ff6b6b;
+    --text: #f0eeff;
+    --text-muted: #8884aa;
+    --text-dim: #4a4865;
+    --border: rgba(108, 99, 255, 0.15);
+    --border2: rgba(255,255,255,0.06);
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 16px; line-height: 1.7; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.4; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 4rem; backdrop-filter: blur(20px); background: rgba(10,10,15,0.85); border-bottom: 1px solid var(--border2); }
+  .nav-logo { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; letter-spacing: 0.02em; color: var(--text); text-decoration: none; }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 0.82rem; font-weight: 400; color: var(--text-muted); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent2); }
+
+  .hero { min-height: 100vh; display: flex; align-items: center; padding: 8rem 4rem 4rem; position: relative; overflow: hidden; }
+  .hero-bg-glow { position: absolute; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(108,99,255,0.08) 0%, transparent 70%); top: -100px; right: -200px; pointer-events: none; }
+  .hero-bg-glow2 { position: absolute; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(0,212,170,0.06) 0%, transparent 70%); bottom: 100px; left: -100px; pointer-events: none; }
+  .hero-content { max-width: 860px; position: relative; z-index: 1; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent2); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem; border: 1px solid rgba(0,212,170,0.2); padding: 6px 14px; border-radius: 100px; }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent2); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.4; transform:scale(0.8); } }
+  .hero-name { font-family: var(--font-display); font-size: clamp(2.8rem, 6.5vw, 5rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+  .hero-name .line2 { color: transparent; -webkit-text-stroke: 1px rgba(108,99,255,0.5); }
+  .hero-title { font-family: var(--font-display); font-size: clamp(1rem, 2.2vw, 1.35rem); font-weight: 500; color: var(--text-muted); margin-bottom: 1.5rem; letter-spacing: 0.01em; }
+  .hero-title .highlight { color: var(--accent); }
+  .hero-desc { font-size: 0.97rem; color: var(--text-muted); max-width: 580px; margin-bottom: 2.5rem; line-height: 1.85; }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; background: var(--accent); color: #fff; font-family: var(--font-body); font-size: 0.88rem; font-weight: 500; text-decoration: none; border-radius: 8px; border: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; letter-spacing: 0.02em; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(108,99,255,0.3); }
+  .btn-ghost { display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; background: transparent; color: var(--text-muted); font-family: var(--font-body); font-size: 0.88rem; font-weight: 400; text-decoration: none; border-radius: 8px; border: 1px solid var(--border2); cursor: pointer; transition: color 0.2s, border-color 0.2s; }
+  .btn-ghost:hover { color: var(--text); border-color: var(--border); }
+  .hero-stats { display: flex; gap: 3rem; margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid var(--border2); flex-wrap: wrap; }
+  .stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1; margin-bottom: 4px; }
+  .stat-num span { color: var(--accent); }
+  .stat-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  section { padding: 6rem 4rem; position: relative; z-index: 1; }
+  .section-label { font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  .section-title { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem; }
+  .section-sub { color: var(--text-muted); font-size: 0.92rem; max-width: 520px; margin-bottom: 3rem; }
+
+  /* ACHIEVEMENTS */
+  .achievements-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+  .ach-card { background: var(--bg-card); border: 1px solid var(--border2); border-radius: 14px; padding: 1.5rem; transition: border-color 0.2s, transform 0.2s; }
+  .ach-card:hover { border-color: var(--border); transform: translateY(-3px); }
+  .ach-num { font-family: var(--font-display); font-size: 2.2rem; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 6px; }
+  .ach-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: var(--border2); border: 1px solid var(--border2); border-radius: 16px; overflow: hidden; }
+  .skill-card { background: var(--bg-card); padding: 1.75rem; transition: background 0.2s; }
+  .skill-card:hover { background: var(--bg-card2); }
+  .skill-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; margin-bottom: 1rem; }
+  .skill-icon.purple { background: rgba(108,99,255,0.15); color: #a09aff; }
+  .skill-icon.teal { background: rgba(0,212,170,0.1); color: var(--accent2); }
+  .skill-icon.coral { background: rgba(255,107,107,0.1); color: var(--accent3); }
+  .skill-icon.amber { background: rgba(255,180,0,0.1); color: #ffb400; }
+  .skill-name { font-family: var(--font-display); font-size: 0.95rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text); }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.75rem; }
+  .tag { font-family: var(--font-mono); font-size: 0.66rem; padding: 3px 10px; border-radius: 100px; border: 1px solid var(--border2); color: var(--text-dim); letter-spacing: 0.04em; }
+  .learning-box { background: var(--bg-card); border: 1px solid var(--border2); border-radius: 16px; padding: 1.75rem 2rem; display: flex; align-items: flex-start; gap: 1.5rem; margin-top: 1.5rem; }
+  .learning-items { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 0.75rem; }
+  .learning-tag { font-family: var(--font-mono); font-size: 0.7rem; padding: 5px 14px; border-radius: 100px; border: 1px solid rgba(108,99,255,0.3); color: #a09aff; background: rgba(108,99,255,0.06); }
+
+  /* PROJECTS */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+  .project-card { background: var(--bg-card); border: 1px solid var(--border2); border-radius: 16px; padding: 2rem; position: relative; overflow: hidden; transition: border-color 0.3s, transform 0.3s; }
+  .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); opacity: 0; transition: opacity 0.3s; }
+  .project-card:hover { border-color: var(--border); transform: translateY(-4px); }
+  .project-card:hover::before { opacity: 1; }
+  .project-label { font-family: var(--font-mono); font-size: 0.68rem; color: var(--accent2); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  .project-name { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; margin-bottom: 0.75rem; letter-spacing: -0.01em; }
+  .project-desc { color: var(--text-muted); font-size: 0.85rem; line-height: 1.75; margin-bottom: 1.25rem; }
+  .impact-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(0,212,170,0.08); border: 1px solid rgba(0,212,170,0.2); border-radius: 8px; padding: 7px 13px; font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent2); margin-bottom: 1.25rem; }
+  .impact-badge::before { content: '↑'; font-size: 0.9rem; font-weight: 700; }
+
+  /* EXPERIENCE */
+  .exp-timeline { position: relative; padding-left: 2rem; border-left: 1px solid var(--border2); }
+  .exp-item { margin-bottom: 2.75rem; position: relative; }
+  .exp-item::before { content: ''; position: absolute; left: -2.4rem; top: 6px; width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--accent); background: var(--bg); }
+  .exp-period { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.08em; margin-bottom: 0.3rem; text-transform: uppercase; }
+  .exp-role { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; margin-bottom: 0.2rem; }
+  .exp-company { font-size: 0.85rem; color: var(--accent); margin-bottom: 0.75rem; }
+  .exp-bullets { list-style: none; padding: 0; }
+  .exp-bullets li { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; padding-left: 1.1rem; position: relative; margin-bottom: 0.4rem; }
+  .exp-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--text-dim); }
+
+  /* CERTIFICATIONS */
+  .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+  .cert-card { background: var(--bg-card); border: 1px solid var(--border2); border-radius: 14px; padding: 1.5rem; display: flex; gap: 1rem; align-items: flex-start; transition: border-color 0.2s; }
+  .cert-card:hover { border-color: var(--border); }
+  .cert-icon { width: 38px; height: 38px; border-radius: 10px; background: rgba(108,99,255,0.12); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+  .cert-name { font-family: var(--font-display); font-size: 0.9rem; font-weight: 600; margin-bottom: 4px; }
+  .cert-org { font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent2); letter-spacing: 0.05em; margin-bottom: 4px; }
+  .cert-year { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-dim); }
+
+  /* CONTACT */
+  .contact-section { text-align: center; padding: 6rem 4rem; }
+  .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2.5rem; }
+  .contact-item { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); }
+
+  footer { padding: 2rem 4rem; border-top: 1px solid var(--border2); display: flex; justify-content: space-between; align-items: center; }
+  footer p { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.05em; }
+
+  .fade-up { opacity: 0; transform: translateY(24px); animation: fadeUp 0.7s ease forwards; }
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+  .fade-up:nth-child(1) { animation-delay: 0.1s; }
+  .fade-up:nth-child(2) { animation-delay: 0.2s; }
+  .fade-up:nth-child(3) { animation-delay: 0.3s; }
+  .fade-up:nth-child(4) { animation-delay: 0.4s; }
+  .fade-up:nth-child(5) { animation-delay: 0.5s; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero, section { padding: 5rem 1.5rem 3rem; }
+    .hero-stats { gap: 1.5rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+    .contact-section { padding: 4rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">B<span>.</span>R</a>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="position:relative;">
+  <div class="hero-bg-glow"></div>
+  <div class="hero-bg-glow2"></div>
+  <div class="hero-content" style="display:flex;gap:4rem;align-items:center;width:100%;">
+    <div style="flex:1;min-width:0;">
+    <div class="hero-tag fade-up">Available for new opportunities</div>
+    <h1 class="hero-name fade-up">
+      Bhuvaneswaran <span class="line2">R</span>
+    </h1>
+    <p class="hero-title fade-up">
+      <span class="highlight">Team Lead</span> · .NET Full-Stack Developer · BFSI & Digital Onboarding
+    </p>
+    <p class="hero-desc fade-up">
+      6+ years building compliance-driven BFSI platforms and enterprise web applications.
+      From KYC automation to Finacle Core Banking integrations — I lead teams, architect systems,
+      and deliver software that ships to production with zero critical incidents.
+    </p>
+    <div class="hero-ctas fade-up">
+      <a class="btn-primary" href="https://www.linkedin.com/in/bhuvaneswaran-r-1b1b59188/" target="_blank">↗ Connect on LinkedIn</a>
+      <a class="btn-ghost" href="mailto:anbu.bhuvan0451@gmail.com">✉ anbu.bhuvan0451@gmail.com</a>
+    </div>
+    <div class="hero-stats fade-up">
+      <div>
+        <p class="stat-num">6<span>+</span></p>
+        <p class="stat-label">Years Experience</p>
+      </div>
+      <div>
+        <p class="stat-num">60<span>%</span></p>
+        <p class="stat-label">Onboarding Effort Cut</p>
+      </div>
+      <div>
+        <p class="stat-num">6<span>+</span></p>
+        <p class="stat-label">KYC & Banking APIs</p>
+      </div>
+      <div>
+        <p class="stat-num">3<span>+</span></p>
+        <p class="stat-label">Concurrent Projects Led</p>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- KEY ACHIEVEMENTS -->
+<section id="achievements" style="background: rgba(255,255,255,0.01);">
+  <p class="section-label">Impact</p>
+  <h2 class="section-title">Key Achievements</h2>
+  <p class="section-sub">Measurable outcomes from 6+ years of production engineering and team leadership.</p>
+  <div class="achievements-grid">
+    <div class="ach-card">
+      <p class="ach-num">60%</p>
+      <p class="ach-desc">Reduction in manual onboarding effort for NBFCs via iStart — integrating 6+ KYC & Core Banking APIs end-to-end.</p>
+    </div>
+    <div class="ach-card">
+      <p class="ach-num">3+</p>
+      <p class="ach-desc">Projects adopted the layered, SOLID-compliant API framework I architected at iSolve Technologies as the company standard.</p>
+    </div>
+    <div class="ach-card">
+      <p class="ach-num">2.5 yrs</p>
+      <p class="ach-desc">Promoted to Team Lead within 2.5 years — managing 4 developers across 3 concurrent client projects.</p>
+    </div>
+    <div class="ach-card">
+      <p class="ach-num">0</p>
+      <p class="ach-desc">Critical security incidents post-deployment — achieved by implementing OWASP-aligned JWT, XSS, and SQL Injection controls.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">Technical Expertise</p>
+  <h2 class="section-title">Core Skills</h2>
+  <p class="section-sub">Deep backend expertise across .NET, SQL, security, and enterprise integration patterns.</p>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon purple">⚙</div>
+      <p class="skill-name">Backend Development</p>
+      <p style="font-size:0.8rem;color:var(--text-muted);line-height:1.6;">Primary strength — enterprise .NET applications for BFSI.</p>
+      <div class="skill-tags">
+        <span class="tag">C#</span><span class="tag">.NET Core</span><span class="tag">ASP.NET MVC</span><span class="tag">Web API</span><span class="tag">ADO.NET</span><span class="tag">.NET Framework 4.2+</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon teal">🗄</div>
+      <p class="skill-name">Database Engineering</p>
+      <p style="font-size:0.8rem;color:var(--text-muted);line-height:1.6;">Query performance, execution plan analysis, and complex schema design.</p>
+      <div class="skill-tags">
+        <span class="tag">MS SQL</span><span class="tag">Oracle</span><span class="tag">MySQL</span><span class="tag">Stored Procs</span><span class="tag">Indexing</span><span class="tag">SQL Server Jobs</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon coral">🏗</div>
+      <p class="skill-name">Architecture & Patterns</p>
+      <p style="font-size:0.8rem;color:var(--text-muted);line-height:1.6;">Designing scalable, maintainable systems for regulated industries.</p>
+      <div class="skill-tags">
+        <span class="tag">SOLID</span><span class="tag">Layered Architecture</span><span class="tag">Microservices</span><span class="tag">DI</span><span class="tag">Repository Pattern</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon amber">🔐</div>
+      <p class="skill-name">Security & Compliance</p>
+      <p style="font-size:0.8rem;color:var(--text-muted);line-height:1.6;">OWASP-aligned controls across all enterprise applications.</p>
+      <div class="skill-tags">
+        <span class="tag">JWT Auth</span><span class="tag">OWASP Top 10</span><span class="tag">XSS Prevention</span><span class="tag">SQL Injection</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon purple">🔗</div>
+      <p class="skill-name">API & Integrations</p>
+      <p style="font-size:0.8rem;color:var(--text-muted);line-height:1.6;">Complex third-party integrations for KYC, banking, and document management.</p>
+      <div class="skill-tags">
+        <span class="tag">RESTful APIs</span><span class="tag">Karza</span><span class="tag">AuthBridge</span><span class="tag">UIDAI</span><span class="tag">NSDL</span><span class="tag">Finacle</span><span class="tag">DMS</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon teal">🖥</div>
+      <p class="skill-name">Frontend & Tooling</p>
+      <p style="font-size:0.8rem;color:var(--text-muted);line-height:1.6;">Supporting frontend development, source control, and deployment.</p>
+      <div class="skill-tags">
+        <span class="tag">JavaScript</span><span class="tag">jQuery</span><span class="tag">HTML5/CSS3</span><span class="tag">Git</span><span class="tag">IIS 10</span><span class="tag">Postman</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon amber">👥</div>
+      <p class="skill-name">Tech Leadership</p>
+      <p style="font-size:0.8rem;color:var(--text-muted);line-height:1.6;">Full SDLC ownership — from client workshops to production releases.</p>
+      <div class="skill-tags">
+        <span class="tag">Team of 4</span><span class="tag">Code Reviews</span><span class="tag">Sprint Planning</span><span class="tag">Mentoring</span><span class="tag">Client Stakeholders</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon coral">🤖</div>
+      <p class="skill-name">Currently Exploring</p>
+      <p style="font-size:0.8rem;color:var(--text-muted);line-height:1.6;">Actively upskilling in modern cloud and AI/ML engineering.</p>
+      <div class="skill-tags">
+        <span class="tag">Angular (Basic)</span><span class="tag">Azure (Basic)</span><span class="tag">AI/ML Engineering</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="background: rgba(255,255,255,0.01);">
+  <p class="section-label">Work I'm Proud Of</p>
+  <h2 class="section-title">Flagship Projects</h2>
+  <p class="section-sub">Enterprise systems built for regulated industries — scale, compliance, and measurable impact.</p>
+  <div class="projects-grid">
+
+    <!-- iStart -->
+    <div class="project-card">
+      <p class="project-label">BFSI Platform · iSolve Technologies · 2022–Present</p>
+      <h3 class="project-name">iStart</h3>
+      <p class="project-desc">Enterprise-grade digital onboarding platform for NBFCs and banking institutions. Automates the entire account creation workflow — from KYC validation and document management to core banking provisioning — in a single regulated pipeline.</p>
+      <div class="impact-badge">~60% reduction in manual onboarding effort</div>
+      <div style="margin-bottom:1.25rem;">
+        <p style="font-size:0.72rem;color:var(--text-dim);font-family:var(--font-mono);margin-bottom:8px;letter-spacing:0.06em;">INTEGRATIONS</p>
+        <div class="skill-tags">
+          <span class="tag" style="color:var(--accent2);border-color:rgba(0,212,170,0.25);">Finacle Core Banking</span>
+          <span class="tag" style="color:var(--accent2);border-color:rgba(0,212,170,0.25);">UIDAI (Aadhaar)</span>
+          <span class="tag" style="color:var(--accent2);border-color:rgba(0,212,170,0.25);">NSDL (PAN)</span>
+          <span class="tag" style="color:var(--accent2);border-color:rgba(0,212,170,0.25);">Karza</span>
+          <span class="tag" style="color:var(--accent2);border-color:rgba(0,212,170,0.25);">AuthBridge</span>
+          <span class="tag" style="color:var(--accent2);border-color:rgba(0,212,170,0.25);">DMS APIs</span>
+        </div>
+      </div>
+      <div style="margin-bottom:1.25rem;">
+        <p style="font-size:0.72rem;color:var(--text-dim);font-family:var(--font-mono);margin-bottom:8px;letter-spacing:0.06em;">DEPLOYED FOR</p>
+        <div class="skill-tags">
+          <span class="tag" style="color:#ffb400;border-color:rgba(255,180,0,0.25);">TMB</span>
+          <span class="tag" style="color:#ffb400;border-color:rgba(255,180,0,0.25);">Karnataka Bank</span>
+          <span class="tag" style="color:#ffb400;border-color:rgba(255,180,0,0.25);">SPCBL</span>
+          <span class="tag" style="color:#ffb400;border-color:rgba(255,180,0,0.25);">RNSB</span>
+        </div>
+      </div>
+      <div style="padding-top:1rem;border-top:1px solid var(--border2);">
+        <p style="font-size:0.72rem;color:var(--text-dim);font-family:var(--font-mono);margin-bottom:8px;letter-spacing:0.06em;">TECH STACK</p>
+        <div class="skill-tags">
+          <span class="tag">ASP.NET MVC</span><span class="tag">ASP.NET Core</span><span class="tag">C#</span><span class="tag">MSSQL</span><span class="tag">JWT</span><span class="tag">IIS</span><span class="tag">OWASP</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Artwork Management System -->
+    <div class="project-card">
+      <p class="project-label">Pharma & CPG · Karomi Technology · 2022</p>
+      <h3 class="project-name">Artwork Management System</h3>
+      <p class="project-desc">Workflow-driven artwork lifecycle approval platform for Pharmacy and CPG companies. Manages multi-stage approval flows from initial design submission through to regulatory sign-off, with full audit trails.</p>
+      <div style="padding-top:1rem;border-top:1px solid var(--border2);">
+        <p style="font-size:0.72rem;color:var(--text-dim);font-family:var(--font-mono);margin-bottom:8px;letter-spacing:0.06em;">TECH STACK</p>
+        <div class="skill-tags">
+          <span class="tag">ASP.NET MVC</span><span class="tag">C#</span><span class="tag">MSSQL</span><span class="tag">JavaScript</span><span class="tag">jQuery</span><span class="tag">RESTful APIs</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hospital Information System -->
+    <div class="project-card">
+      <p class="project-label">Healthcare · JDS Software Solution · 2020–2022</p>
+      <h3 class="project-name">Hospital Information System</h3>
+      <p class="project-desc">Web-based system covering patient records, billing, OPD/IPD tracking, and financial reporting for multi-specialty hospitals. Optimized MSSQL stored procedures to deliver measurably faster report generation and billing cycles.</p>
+      <div style="padding-top:1rem;border-top:1px solid var(--border2);">
+        <p style="font-size:0.72rem;color:var(--text-dim);font-family:var(--font-mono);margin-bottom:8px;letter-spacing:0.06em;">TECH STACK</p>
+        <div class="skill-tags">
+          <span class="tag">ASP.NET MVC</span><span class="tag">ADO.NET</span><span class="tag">C#</span><span class="tag">MSSQL</span><span class="tag">HTML5/CSS3</span><span class="tag">JavaScript</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label">Career Journey</p>
+  <h2 class="section-title">Experience</h2>
+  <p class="section-sub">Progressive growth from associate engineer to team lead across BFSI, Healthcare, and CPG domains.</p>
+  <div class="exp-timeline">
+
+    <div class="exp-item">
+      <p class="exp-period">Jan 2025 – Present</p>
+      <p class="exp-role">Team Lead</p>
+      <p class="exp-company">iSolve Technologies Private Limited · Chennai, Tamil Nadu</p>
+      <ul class="exp-bullets">
+        <li>Lead a team of 4 developers across the full SDLC — from client requirement workshops through architecture, sprint planning, code reviews, QA coordination, and production release.</li>
+        <li>Own system design and architectural decisions, applying layered architecture, Dependency Injection, and microservices principles for scalability.</li>
+        <li>Collaborate directly with client stakeholders and MDs to translate complex business requirements into technical specs, reducing rework cycles.</li>
+        <li>Manage Git branching strategy (feature → dev → staging → main) enabling controlled, conflict-free releases across parallel streams.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <p class="exp-period">Aug 2022 – Dec 2024</p>
+      <p class="exp-role">Senior Project Associate</p>
+      <p class="exp-company">iSolve Technologies Private Limited · Chennai, Tamil Nadu</p>
+      <ul class="exp-bullets">
+        <li>Designed and developed RESTful APIs and ASP.NET MVC services for iStart, integrating Finacle Core Banking, DMS, and KYC providers (Karza, AuthBridge, NSDL, UIDAI).</li>
+        <li>Engineered MSSQL database layer — tables, stored procedures, functions, views, SQL Server Jobs — with indexing and execution plan analysis.</li>
+        <li>Implemented JWT authentication, XSS prevention, and SQL Injection controls aligned to OWASP Top 10 for BFSI regulatory compliance.</li>
+        <li>Deployed and maintained enterprise applications on IIS 10 with uptime monitoring and secure production environments.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <p class="exp-period">Feb 2022 – Aug 2022</p>
+      <p class="exp-role">Software Developer</p>
+      <p class="exp-company">Karomi Technology Private Limited · Chennai, Tamil Nadu</p>
+      <ul class="exp-bullets">
+        <li>Developed workflow-driven backend modules for the Artwork Management System — a lifecycle approval platform for Pharmacy and CPG companies.</li>
+        <li>Built and maintained RESTful API endpoints, integrated third-party services, and contributed to frontend development using JavaScript and jQuery.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <p class="exp-period">Oct 2020 – Feb 2022</p>
+      <p class="exp-role">Associate Software Engineer</p>
+      <p class="exp-company">JDS Software Solution · Dindigul, Tamil Nadu</p>
+      <ul class="exp-bullets">
+        <li>Developed core modules for a Hospital Information System — patient records, billing, and reporting — using ASP.NET MVC, ADO.NET, and MSSQL.</li>
+        <li>Participated in full development lifecycle: requirement analysis, database design, development, unit testing, and IIS deployment.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications" style="background: rgba(255,255,255,0.01);">
+  <p class="section-label">Credentials</p>
+  <h2 class="section-title">Certifications</h2>
+  <p class="section-sub">Formal recognition of expertise in AI/ML and Oracle database engineering.</p>
+  <div class="cert-grid">
+    <div class="cert-card">
+      <div class="cert-icon">🤖</div>
+      <div>
+        <p class="cert-name">AI & Machine Learning Program</p>
+        <p class="cert-org">GUVI</p>
+        <p class="cert-year">Nov 2025</p>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🏅</div>
+      <div>
+        <p class="cert-name">Oracle Certified Professional</p>
+        <p class="cert-org">Greens Technology</p>
+        <p class="cert-year">Sep 2020</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <p class="section-label">Get In Touch</p>
+  <h2 class="section-title">Open to Opportunities</h2>
+  <p class="section-sub" style="margin:0 auto 1.5rem;">Looking for a .NET Team Lead who ships secure, scalable systems for regulated industries? Let's talk.</p>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:0.75rem;margin-bottom:2rem;">
+    <div class="contact-item">📍 Chennai, Tamil Nadu, India</div>
+    <div class="contact-item">📞 +91 733 953 3412</div>
+    <div class="contact-item">✉ anbu.bhuvan0451@gmail.com</div>
+  </div>
+  <div class="contact-links">
+    <a class="btn-primary" href="https://www.linkedin.com/in/bhuvaneswaran-r-1b1b59188/" target="_blank">↗ LinkedIn Profile</a>
+    <a class="btn-ghost" href="mailto:anbu.bhuvan0451@gmail.com">✉ Send an Email</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Bhuvaneswaran R — Team Lead & .NET Full-Stack Developer</p>
+  <p>Chennai, India · BFSI & Enterprise Systems</p>
+</footer>
+
+</body>
+</html>
