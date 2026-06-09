@@ -25,6 +25,49 @@
     --font-body: 'DM Sans', sans-serif;
     --font-mono: 'DM Mono', monospace;
   }
+
+  /* ── LIGHT THEME ── */
+  html.light {
+    --bg: #f5f4ff;
+    --bg-card: #ffffff;
+    --bg-card2: #eeedf8;
+    --accent: #5046e5;
+    --accent2: #00a884;
+    --accent3: #e05555;
+    --text: #0a0914;
+    --text-muted: #2a2750;
+    --text-dim: #5a5880;
+    --border: rgba(80, 70, 229, 0.18);
+    --border2: rgba(0,0,0,0.08);
+  }
+
+  html.light body { background: var(--bg); }
+  html.light body::before { opacity: 0.12; }
+  html.light nav { background: rgba(245,244,255,0.88); border-bottom: 1px solid rgba(0,0,0,0.08); }
+  html.light .hero-name .line2 { -webkit-text-stroke: 1px rgba(80,70,229,0.4); }
+  html.light .exp-item::before { background: var(--bg); }
+  html.light .hero-tag { border-color: rgba(0,168,132,0.3); }
+
+  /* toggle button */
+  .theme-toggle {
+    background: var(--bg-card2);
+    border: 1px solid var(--border2);
+    border-radius: 100px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+    white-space: nowrap;
+  }
+  .theme-toggle:hover { border-color: var(--border); color: var(--text); }
+  .theme-toggle .icon { font-size: 0.9rem; transition: transform 0.4s; }
+  .theme-toggle:hover .icon { transform: rotate(20deg); }
   html { scroll-behavior: smooth; }
   body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 16px; line-height: 1.7; overflow-x: hidden; }
   body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.4; }
@@ -156,17 +199,21 @@
     <li><a href="#certifications">Certifications</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+    <span class="icon" id="themeIcon">☀️</span>
+    <span id="themeLabel">Light</span>
+  </button>
 </nav>
 
 <!-- HERO -->
-<section class="hero" style="position:relative;">
+<section class="hero">
   <div class="hero-bg-glow"></div>
   <div class="hero-bg-glow2"></div>
-  <div class="hero-content" style="display:flex;gap:4rem;align-items:center;width:100%;">
-    <div style="flex:1;min-width:0;">
+  <div class="hero-content">
     <div class="hero-tag fade-up">Available for new opportunities</div>
     <h1 class="hero-name fade-up">
-      Bhuvaneswaran <span class="line2">R</span>
+      Bhuvaneswaran<br>
+      <span class="line2">R</span>
     </h1>
     <p class="hero-title fade-up">
       <span class="highlight">Team Lead</span> · .NET Full-Stack Developer · BFSI & Digital Onboarding
@@ -186,7 +233,7 @@
         <p class="stat-label">Years Experience</p>
       </div>
       <div>
-        <p class="stat-num">60<span>%</span></p>
+        <p class="stat-num">~60<span>%</span></p>
         <p class="stat-label">Onboarding Effort Cut</p>
       </div>
       <div>
@@ -198,7 +245,6 @@
         <p class="stat-label">Concurrent Projects Led</p>
       </div>
     </div>
-    </div>
   </div>
 </section>
 
@@ -209,7 +255,7 @@
   <p class="section-sub">Measurable outcomes from 6+ years of production engineering and team leadership.</p>
   <div class="achievements-grid">
     <div class="ach-card">
-      <p class="ach-num">60%</p>
+      <p class="ach-num">~60%</p>
       <p class="ach-desc">Reduction in manual onboarding effort for NBFCs via iStart — integrating 6+ KYC & Core Banking APIs end-to-end.</p>
     </div>
     <div class="ach-card">
@@ -471,5 +517,28 @@
   <p>Chennai, India · BFSI & Enterprise Systems</p>
 </footer>
 
+<script>
+  function toggleTheme() {
+    const html = document.documentElement;
+    const isLight = html.classList.toggle('light');
+    document.getElementById('themeIcon').textContent = isLight ? '🌙' : '☀️';
+    document.getElementById('themeLabel').textContent = isLight ? 'Dark' : 'Light';
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  }
+
+  // Restore saved preference
+  (function() {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') {
+      document.documentElement.classList.add('light');
+      window.addEventListener('DOMContentLoaded', function() {
+        const icon = document.getElementById('themeIcon');
+        const label = document.getElementById('themeLabel');
+        if (icon) icon.textContent = '🌙';
+        if (label) label.textContent = 'Dark';
+      });
+    }
+  })();
+</script>
 </body>
 </html>
